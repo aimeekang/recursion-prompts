@@ -33,7 +33,25 @@ var sum = function(array) {
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+  // base case
+  if (array.length === 0) {
+    return 0;
+  }
+  // recursive case
+  if (Array.isArray(array[0])) {
+    return arraySum(array[0]) + arraySum(array.slice(1));
+  } else {
+    return array[0] + arraySum(array.slice(1));
+  }
 };
+
+// 1 + arraySum([[2,3],[[4]],5])
+// 1 + arraySum([2,3]) + arraySum([[[4]], 5])
+// 1 + 2 + arraySum([3]) + arraySum[[4]]) + arraySum([5])
+// 1 + 2 + 3 + arraySum([]) + arraySum[4] + arraySum([]) + 5 + arraySum([])
+// 1 + (2 + (3 + 0)) + (4 + (arraySum([]) + 0)) + (5 + 0)
+// 1 + 2 + 3 + 0 + 4 + 0 + 0 + 5 + 0
+
 
 // 4. Check if a number is even.
 var isEven = function(n) {
@@ -139,6 +157,15 @@ var powerOfTwo = function(n) {
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
+  // base case
+  if (string === '') {
+    return '';
+  }
+
+  var firstChar = string[0];
+  var remaining = string.slice(1);
+  var reversed = reverse(remaining) + firstChar;
+  return reversed;
 };
 
 // 10. Write a function that determines if a string is a palindrome.
@@ -191,6 +218,8 @@ var reverseArr = function(array) {
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
 var buildList = function(value, length) {
+  var result = value;
+
 };
 
 // 19. Implement FizzBuzz. Given integer n, return an array of the string representations of 1 to n.
