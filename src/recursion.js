@@ -69,7 +69,33 @@ var sumBelow = function(n) {
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+  var result = [];
+  // base case: if no integers in range
+  if (y - x === 0 || Math.abs(y - x) === 1) {
+    return result;
+  }
+  // ending greater than starting
+  if (y > x) {
+    result = [x + 1].concat(range(x + 1, y));
+    return result;
+  }
+
+  if (x > y) {
+    result = [x - 1].concat(range(x - 1, y));
+    return result;
+  }
+
 };
+
+// where y > x (x goes up by one as we recall the function)
+// range(2, 5) // [3].concat([4]) = [3, 4]
+// range(3, 5) // [4].concat()[] = [4]
+// range(4, 5) // [] (base case)
+
+// where x > y (x goes down by one as we recall the function)
+// range (5, 2) // [4].concat([3]) = [4, 3]
+// range (4, 2) // [3].concat([]) = [3]
+// range (3, 2) // Math.abs(-1) === 1, return [] (base case)
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
@@ -84,6 +110,11 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+  // base case
+  if (n === 1 || n === 2) {
+    return true;
+  }
+
 };
 
 // 9. Write a function that reverses a string.
