@@ -79,7 +79,7 @@ var range = function(x, y) {
     result = [x + 1].concat(range(x + 1, y));
     return result;
   }
-
+  // starting greater than ending
   if (x > y) {
     result = [x - 1].concat(range(x - 1, y));
     return result;
@@ -103,6 +103,20 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  // base case
+  if (exp === 0) {
+    return 1;
+  }
+
+  if (exp === 1) {
+    return base;
+  }
+
+  if (exp > 0) {
+    return base * exponent(base, exp - 1);
+  } else if (exp < 0) {
+    return (1 / base) * exponent(base, exp + 1);
+  }
 };
 
 // 8. Determine if a number is a power of two.
@@ -111,8 +125,14 @@ var exponent = function(base, exp) {
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
   // base case
-  if (n === 1 || n === 2) {
+  if (n === 1) {
     return true;
+  }
+  // recursive case
+  if (n > 1 && n % 2 === 0) {
+    return powerOfTwo(n / 2);
+  } else {
+    return false;
   }
 
 };
