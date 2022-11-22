@@ -38,12 +38,14 @@ var arraySum = function(array) {
 // 4. Check if a number is even.
 var isEven = function(n) {
   n = Math.abs(n);
-
+  // base case
   if (n === 0) {
     return true;
   } else if (n === 1) {
     return false;
-  } else {
+  }
+  // recursive case
+  if (n > 0) {
     return isEven(n - 2);
   }
 };
@@ -52,6 +54,16 @@ var isEven = function(n) {
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+  // base case
+  if (n === 0) {
+    return 0;
+  }
+  // recursive case(s)
+  if (n > 0) {
+    return (n - 1) + sumBelow(n - 1);
+  } else if (n < 0) {
+    return (n + 1) + sumBelow(n + 1);
+  }
 };
 
 // 6. Get the integers within a range (x, y).
