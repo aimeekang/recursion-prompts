@@ -121,7 +121,7 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
-  // base case
+  // base cases
   if (exp === 0) {
     return 1;
   }
@@ -129,7 +129,7 @@ var exponent = function(base, exp) {
   if (exp === 1) {
     return base;
   }
-
+  // recursive cases
   if (exp > 0) {
     return base * exponent(base, exp - 1);
   } else if (exp < 0) {
@@ -238,7 +238,7 @@ var buildList = function(value, length) {
 // 19. Implement FizzBuzz. Given integer n, return an array of the string representations of 1 to n.
 // For multiples of three, output 'Fizz' instead of the number.
 // For multiples of five, output 'Buzz' instead of the number.
-// For numbers which are multiples of both three and five, output “FizzBuzz” instead of the number.
+// For numbers which are multples of both three and five, output “FizzBuzz” instead of the number.
 // fizzBuzz(5) // ['1','2','Fizz','4','Buzz']
 var fizzBuzz = function(n) {
 };
@@ -266,6 +266,25 @@ var countKeysInObj = function(obj, key) {
 // countValuesInObj(obj, 'r') // 2
 // countValuesInObj(obj, 'e') // 1
 var countValuesInObj = function(obj, value) {
+  var count = 0;
+
+  for (var key in obj) {
+    var objValue = obj[key];
+    // base case
+    if (!objValue) {
+      return count;
+    }
+    // recursive case
+    if (typeof objValue === 'object') {
+      count += countValuesInObj(objValue, value);
+    }
+
+    if (typeof objValue === 'string' && objValue === value) {
+      count++;
+    }
+  }
+
+  return count;
 };
 
 // 24. Find all keys in an object (and nested objects) by a provided name and rename
