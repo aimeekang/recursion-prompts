@@ -306,14 +306,65 @@ var fizzBuzz = function(n) {
 };
 
 // 20. Count the occurrence of a value in a list.
+var countOccurrence = function(array, value) {
+  var count = 0;
+  // base case
+  if (array.length === 0) { // can also be written !array.length
+    return count;
+  }
+
+  // recursive case
+  if (array[0] === value) {
+    count++
+  }
+
+  if (array.length > 0) {
+    count += countOccurrence(array.slice(1), value);
+  }
+
+  return count;
+};
+
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
-var countOccurrence = function(array, value) {
-};
+// var countOccurrence = function(array, value) {
+//   // base case
+//   if (array.length === 0){
+//     return 0;
+//   }
+
+//   return (array[0] === value) + countOccurrence(array.slice(1), value);
+// }
+
+
+// for loop:
+// var countOccurance = function(array, value) {
+//   var count = 0;
+
+//   for (var i = 0; i < array.length; i++) {
+//     var ele = array[i];
+//     if (ele === value) {
+//       count++;
+//     }
+//   }
+
+//   return count;
+// }
 
 // 21. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
 var rMap = function(array, callback) {
+  var result = [];
+  // base case
+  if (array.length === 0) {
+    return result;
+  }
+  // recursive case
+  if (array.length > 0) {
+    result = result.concat(callback(array.slice(1)));
+  }
+
+  return result;
 };
 
 // 22. Write a function that counts the number of times a key occurs in an object.
@@ -433,6 +484,23 @@ var flatten = function(array) {
 // 31. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {p:1, o:2, t:2, a:1}
 var letterTally = function(str, obj) {
+  var result = {};
+  // base case
+  if (str === '') {
+    return result;
+  }
+
+  if (str.length > 0) {
+    var char = str[0];
+    if (result[char] === undefined) {
+      result[char] = 1;
+      return letterTally(str.slice(1), obj)
+    } else {
+      result[char] += 1;
+      return letterTally(str.slice(1), obj)
+    }
+  }
+  // return result;
 };
 
 // 32. Eliminate consecutive duplicates in a list. If the list contains repeated
