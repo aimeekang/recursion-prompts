@@ -306,6 +306,8 @@ var fizzBuzz = function(n) {
 };
 
 // 20. Count the occurrence of a value in a list.
+// countOccurrence([2,7,4,4,1,4], 4) // 3
+// countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 var countOccurrence = function(array, value) {
   var count = 0;
   // base case
@@ -325,8 +327,6 @@ var countOccurrence = function(array, value) {
   return count;
 };
 
-// countOccurrence([2,7,4,4,1,4], 4) // 3
-// countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 // var countOccurrence = function(array, value) {
 //   // base case
 //   if (array.length === 0){
@@ -353,6 +353,8 @@ var countOccurrence = function(array, value) {
 
 // 21. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
+
+// NOT PASSING:
 var rMap = function(array, callback) {
   var result = [];
   // base case
@@ -443,6 +445,19 @@ var nthFibo = function(n) {
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
 var capitalizeWords = function(array) {
+  var result = [];
+  // base case
+  if (array.length === 0) {
+    return result;
+  }
+  // recursive case
+  if (array.length > 0) {
+    var capWord = array[0].toUpperCase();
+    result.push(capWord);
+    result = result.concat(capitalizeWords(array.slice(1)));
+  }
+
+  return result;
 };
 
 // 28. Given an array of strings, capitalize the first letter of each index.
