@@ -463,6 +463,19 @@ var capitalizeWords = function(array) {
 // 28. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car','poop','banana']); // ['Car','Poop','Banana']
 var capitalizeFirst = function(array) {
+  var result = [];
+  // base case
+  if (array.length === 0) {
+    return result;
+  }
+  // recursive case
+  if (array.length > 0) {
+    var capFirst = array[0][0].toUpperCase() + array[0].slice(1);
+    result.push(capFirst);
+    result = result.concat(capitalizeFirst(array.slice(1)));
+  }
+
+  return result;
 };
 
 // 29. Return the sum of all even numbers in an object containing nested objects.
@@ -498,6 +511,8 @@ var flatten = function(array) {
 
 // 31. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {p:1, o:2, t:2, a:1}
+
+// NOT PASSING:
 var letterTally = function(str, obj) {
   var result = {};
   // base case
