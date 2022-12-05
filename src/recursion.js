@@ -303,6 +303,26 @@ var buildList = function(value, length) {
 // For numbers which are multples of both three and five, output “FizzBuzz” instead of the number.
 // fizzBuzz(5) // ['1','2','Fizz','4','Buzz']
 var fizzBuzz = function(n) {
+  console.log(n);
+  var result = [];
+  // base case
+  if (n === 0) {
+    return result;
+  }
+  console.log(result);
+  if (n % 3 === 0 && n % 5 === 0) {
+    result.push('FizzBuzz');
+  } else if (n % 3 === 0) {
+    result.push('Fizz');
+  } else if (n % 5 === 0) {
+    result.push('Buzz');
+  } else {
+    result.push(n.toString());
+  }
+  // recursive
+  result = fizzBuzz(n - 1).concat(result);
+  console.log(result);
+  return result;
 };
 
 // 20. Count the occurrence of a value in a list.
@@ -516,11 +536,11 @@ var letterTally = function(str, obj) {
   if (obj === undefined) {
     obj = {};
   }
-  // base case
+  // base case: we've gone through every char of str
   if (str === '') {
     return obj;
   }
-  // recursive case
+  // recursive case: if we still have chars
   if (str.length > 0) {
     var char = str[0];
 
@@ -530,7 +550,7 @@ var letterTally = function(str, obj) {
       obj[char] += 1;
     }
   }
-
+  // move onto next value
   return letterTally(str.slice(1), obj);
 }
 
