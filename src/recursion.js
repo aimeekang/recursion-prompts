@@ -335,11 +335,10 @@ var countOccurrence = function(array, value) {
     return count;
   }
 
-  // recursive case
   if (array[0] === value) {
     count++
   }
-
+  // recursive case
   if (array.length > 0) {
     count += countOccurrence(array.slice(1), value);
   }
@@ -406,14 +405,14 @@ var countValuesInObj = function(obj, value) {
   for (var key in obj) {
     var objValue = obj[key];
     // base case
-    if (!objValue) {
+    if (!objValue) { // could also be written as objValue === undefined
       return count;
     }
-    // recursive case
+
     if (typeof objValue === 'string' && objValue === value) {
       count++;
     }
-
+    // recursive case
     if (typeof objValue === 'object') {
       count += countValuesInObj(objValue, value);
     }
@@ -431,12 +430,12 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {
     if (!value) {
       return obj;
     }
-    // recursive case
+
     if (key === oldKey) {
       obj[newKey] = value;
       delete obj[oldKey];
     }
-
+    // recursive case
     if (typeof value === 'object') {
       replaceKeysInObj(value, oldKey, newKey);
     }
@@ -508,6 +507,20 @@ var capitalizeFirst = function(array) {
 // };
 // nestedEvenSum(obj1); // 10
 var nestedEvenSum = function(obj) {
+  var sum = 0;
+  // lookup each key in obj
+  if (typeof obj === 'number' && obj % 2 === 0) {
+    sum += obj;
+  }
+
+  if (typeof obj === 'object') {
+    for (var key in obj) {
+      var value = obj[key];
+        sum += nestedEvenSum(value);
+      }
+  }
+
+  return sum;
 };
 
 // 30. Flatten an array containing nested arrays.
@@ -581,8 +594,39 @@ var letterTally = function(str, obj) {
 // elements should not be changed.
 // compress([1,2,2,3,4,4,5,5,5]) // [1,2,3,4,5]
 // compress([1,2,2,3,4,4,2,5,5,5,4,4]) // [1,2,3,4,2,5,4]
+
+// NOT PASSING:
 var compress = function(list) {
+  var result = [];
+  // base case
+  if (list.length === 0) {
+    return result;
+  }
+
+  if (list[0] !== result[result.length - 1]) {
+    result.push(list[0]);
+  } else {
+    result = result.concat(list.slice(1));
+  }
+
+  return result;
 };
+
+// without recursion
+// var compress = function(list) {
+//   var result = [];
+
+//   for (var i = 0; i < list.length; i++) {
+//     var ele = list[i];
+//     var lastNum = result[result.length - 1];
+
+//     if (ele !== lastNum) {
+//       result.push(ele);
+//     }
+//   }
+
+//   return result;
+// };
 
 // 33. Augment every element in a list with a new value where each element is an array
 // itself.
