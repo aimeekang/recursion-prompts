@@ -148,7 +148,6 @@ var powerOfTwo = function(n) {
   } else {
     return false;
   }
-
 };
 
 // 9. Write a function that reverses a string.
@@ -186,13 +185,44 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
+
+// NOT WORKING:
 var modulo = function(x, y) {
+  var sum = y;
+  // base case
+  if (y > x) {
+    return sum;
+  }
+  // recursive case
+  if (y < x) {
+  sum += modulo(x, y + y);
+  }
+
+  return x - sum;
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
 var multiply = function(x, y) {
+  if (x === 0 || y === 0) {
+    return 0;
+  }
+
+  if ((y < 0 && x > 0) || (y > 0 && x > 0)) {
+    return y + multiply(x - 1, y);
+  } else if (y > 0 && x < 0) {
+    return x + multiply(x, y - 1);
+  } else if (y < 0 && x < 0) {
+    return -y + multiply(x + 1, y);
+  }
 };
+
+// examples:
+// multiply(5, 4) // 20
+// multiply(5, 6) // 30
+// multiply(-5, -2) // 10
+// multiply(-5, -3)
+// multiple (-5, 6) // -30
 
 // 13. Write a function that divides two numbers without using the / operator or
 // Math methods to arrive at an approximate quotient (ignore decimal endings).
@@ -388,7 +418,25 @@ var rMap = function(array, callback) {
 // var obj = {'e':{'x':'y'},'t':{'r':{'e':'r'},'p':{'y':'r'}},'y':'e'};
 // countKeysInObj(obj, 'r') // 1
 // countKeysInObj(obj, 'e') // 2
+
+// NOT PASSING:
 var countKeysInObj = function(obj, key) {
+  var count = 0;
+  // set a case for the current input
+  if (typeof obj === 'string' && obj === key) {
+    count++;
+  }
+
+  // if nested,
+  if (typeof obj === 'object') {
+    // loop over nested structure
+    for (var keyName in obj) {
+      // recursively call on all values;
+      count += countKeysInObj(keyName, key);
+    }
+  }
+
+  return count;
 };
 
 // 23. Write a function that counts the number of times a value occurs in an object.
