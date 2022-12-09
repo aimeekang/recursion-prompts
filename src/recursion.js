@@ -695,7 +695,66 @@ var alternateSign = function(array) {
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 var numToText = function(str) {
+  var numWords = {
+    '0': 'zero',
+    '1': 'one',
+    '2': 'two',
+    '3': 'three',
+    '4': 'four',
+    '5': 'five',
+    '6': 'six',
+    '7': 'seven',
+    '8': 'eight',
+    '9': 'nine'
+  };
+  var words = str.split(' ');
+  var result = [];
+
+  if (str === '') {
+    return result;
+  }
+
+  if (str.length > 0) {
+    var word = words[0];
+    if (numWords[word] !== undefined) {
+      result = result.concat(numWords[word]);
+    } else {
+      result = result.concat(word);
+    }
+  }
+
+  return result.concat(numToText(words.slice(1).join(' '))).join(' ');
 };
+
+// without recursion
+// var numToText = function(str) {
+//   var numWords = {
+//     '0': 'zero',
+//     '1': 'one',
+//     '2': 'two',
+//     '3': 'three',
+//     '4': 'four',
+//     '5': 'five',
+//     '6': 'six',
+//     '7': 'seven',
+//     '8': 'eight',
+//     '9': 'nine'
+//   };
+//   var words = str.split(' ');
+//   var newSent = [];
+
+//   for (var i = 0; i < words.length; i++) {
+//     var word = words[i];
+
+//     if (numWords[word] === undefined) {
+//       newSent.push(word);
+//     } else {
+//       newSent.push(numWords[word]);
+//     }
+//   }
+
+//   return newSent.join(' ');
+// };
 
 
 // *** EXTRA CREDIT ***
